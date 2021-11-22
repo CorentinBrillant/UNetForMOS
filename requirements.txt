@@ -1,0 +1,8 @@
+imageio==2.10.1
+matplotlib==3.3.3
+numpy==1.19.4
+opencv_python==4.5.1.48
+Pillow==8.4.0
+pynput==1.7.5
+scikit_learn==1.0.1
+tensorflow==2.4.1
