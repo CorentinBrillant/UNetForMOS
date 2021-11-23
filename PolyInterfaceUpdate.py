@@ -39,9 +39,10 @@ root = Tk()
 root.title("Choose the polygon layer you want to modify")
 feature_filename = fd.askopenfilename(initialdir='.',title="Choose the polygon layer you want to modify")
 root.destroy()
-with open(feature_filename) as f:
-	features = json.load(f)
-	polygons = features["polygons"]
+if feature_filename!="":
+	with open(feature_filename) as f:
+		features = json.load(f)
+		polygons = features["polygons"]
 
 n = len(polygons)
 
