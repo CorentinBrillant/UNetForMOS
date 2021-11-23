@@ -21,6 +21,39 @@ python ./PolyInterfaceUpdate.py
 
 ### First Step : Choose the image you want to label
 
+
+<p align="center">
+<img src="assets/images/1_step.png" width="80%" margin-left="15%"/>
+ </p>
+
+
 ### Second Step : Load a pre-existing polygon layer with the image
 
-### Third Step : 
+
+<p align="center">
+<img src="assets/images/2_step.png" width="80%"/>
+ </p>
+ 
+ 
+### Third Step : Choose your class number by sliding the below horizontal bar and draw polygons
+
+
+<p align="center">
+<img src="assets/images/3_step.png" width="80%"/>
+ </p>
+ 
+ 
+### Fourth Step : Choose a folder to save the new ploygon layer
+
+
+<p align="center">
+<img src="assets/images/4_step.png" width="80%"/>
+ </p>
+ 
+ 
+### Fiveth Step : Choose a folder to export the mask of this layer
+
+
+<p align="center">
+<img src="assets/images/5_step.png" width="80%"/>
+</p>
