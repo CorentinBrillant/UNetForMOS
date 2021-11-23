@@ -9,11 +9,23 @@ from matplotlib.patches import Polygon
 from pynput.keyboard import Key, Controller
 import time
 import json
+import tkinter.filedialog as fd
+from tkinter import *
+from PIL import Image
+import cv2
 
-
-image = 'houses_to_detect_3.png'
+root = Tk()
+root.title("Choose the image you want to label")
+filename = fd.askopenfilename(initialdir='./images',title="Choose the image you want to label")
+root.destroy()
+image = filename.split("/")[-1]
 keyboard = Controller()
 key = Key.esc
+
+
+im = Image.open(filename)
+im = im.resize((512,512))
+im.save("./images/"+image)
 
 features = {}
 polygons = []
@@ -23,9 +35,14 @@ colors = ['red','blue','yellow', 'green', 'black', 'white', 'blueviolet','deeppi
 axfreq = plt.axes([0.2, 0.05, 0.65, 0.03])
 classNum = 1
 
-with open("./features_layers/polygons_"+image.split(".")[-2]+".json") as f:
-	features = json.load(f)
-	polygons = features["polygons"]
+root = Tk()
+root.title("Choose the polygon layer you want to modify")
+feature_filename = fd.askopenfilename(initialdir='.',title="Choose the polygon layer you want to modify")
+root.destroy()
+if feature_filename!="":
+	with open(feature_filename) as f:
+		features = json.load(f)
+		polygons = features["polygons"]
 
 n = len(polygons)
 
@@ -67,8 +84,31 @@ plt.show()
 
 features["input_size"] = size
 features["polygons"] = polygons
-print(polygons)
 
 if n < len(polygons):
-	with open("./features_layers_3/polygons_"+image.split(".")[-2]+".json","w") as f:
+	root = Tk()
+	root.title("Choose the folder to save updated polygon layer")
+	folder = fd.askdirectory(initialdir='.',title="Choose the folder to save updated polygon layer")
+	root.destroy()
+	with open(folder+"/polygons_"+image.split(".")[-2]+".json","w") as f:
 		json.dump(features,f)
+	print("polygon layer saved")
+
+	root = Tk()
+	folder_mask = fd.askdirectory(initialdir='.',title="Choose the folder to export the mask")
+	root.destroy()
+	size = features["input_size"]
+	polygons = features["polygons"]
+	tmp_mask = np.zeros((size[0],size[1]))
+	nb_class = np.max([poly[-1] for poly in polygons]) + 1
+	mask = np.zeros((size[0],size[1],nb_class))
+
+	for poly in polygons:
+		cv2.fillPoly(tmp_mask, np.array([poly[:-1]]),poly[-1])
+
+	for i in range(size[0]):
+		for j in range(size[1]):
+			mask[i,j,int(tmp_mask[i,j])] = 1 
+
+	np.save(folder_mask+'/mask_'+image.split(".")[-2], mask)
+	print("mask saved for ",nb_class," classes")
