@@ -10,7 +10,7 @@ import json
 import datetime
 
 folder_path = "."
-model_save_folder = "./models/checkpoint_2.ckpt"
+model_save_folder = "./models/checkpoint.ckpt"
 
 X = []
 Y = []
@@ -18,12 +18,12 @@ Y = []
 for file in os.listdir(folder_path+"/images"):
 	X.append(np.array(Image.open(folder_path+"/images/"+file).convert('RGB')))
 
-for file in os.listdir(folder_path+"/labels_2"):
-	Y.append(np.load(folder_path+"/labels_2/"+file))
+for file in os.listdir(folder_path+"/labels"):
+	Y.append(np.load(folder_path+"/labels/"+file))
 
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-unet = UNetCompiled(input_size=(512,512,3), n_filters=32, n_classes=3)
+unet = UNetCompiled(input_size=(512,512,3), n_filters=32, n_classes=2)
 
 unet.summary()
 
