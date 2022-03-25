@@ -76,5 +76,5 @@ python train.py
 The test script only shows network segmentation for the image that you specified in the script. Furthermore, it only shows you the result but it doesn't save it.
 To test the Network, launch the command :
 ```
-python train.py
+python test.py
 ```
