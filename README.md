@@ -11,7 +11,7 @@ To install required dependencies please enter the following command in the root 
 pip install -r requirements.txt
 ```
 
-## Manual
+## Polygons Editor Manual
 
 Launch the Interface from the root folder with the following command : 
 
@@ -57,3 +57,24 @@ python ./PolyInterfaceUpdate.py
 <p align="center">
 <img src="assets/images/5_step.png" width="80%"/>
 </p>
+
+## Train and Test UNet
+
+
+### Train : 
+
+
+To train your Neural Network we need to specify the folder with your images and the folder with your labels. We need to have one label file by image.
+Then you must run the following command from the project root directory.
+```
+python train.py
+```
+
+### Test : 
+
+
+The test script only shows network segmentation for the image that you specified in the script. Furthermore, it only shows you the result but it doesn't save it.
+To test the Network, launch the command :
+```
+python train.py
+```
