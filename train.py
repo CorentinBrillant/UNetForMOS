@@ -9,6 +9,7 @@ import tensorflow as tf
 import json
 import datetime
 
+#os.environ['CUDA_VISIBLE_DEVICES'] = "-1"
 folder_path = "."
 model_save_folder = "./models/checkpoint_2.ckpt"
 
