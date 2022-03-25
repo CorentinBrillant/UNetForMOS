@@ -30,10 +30,10 @@ def VisualizeResults(filename):
 				mask[i,j,k] = color[k]
 			
 			#mask[i,j] = int(np.argmax(result[0,i,j]))*100
-	"""
-	kernel = np.ones((2,2),np.uint8)
+	
+	kernel = np.ones((4,4),np.uint8)
 	mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-	"""
+	
 	res_im = Image.fromarray(mask.astype(np.uint8))
 	plt.imshow(res_im)
 	plt.show()
